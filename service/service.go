@@ -45,7 +45,7 @@ func (service *OrderService) GetOrder(writer http.ResponseWriter, reader *http.R
 func (service *OrderService) CreateOrder(writer http.ResponseWriter, reader *http.Request) {
 	reqBody, err := io.ReadAll(reader.Body)
 	if !common.HasError(err) {
-		var order *model.Order
+		order := model.NewOrder()
 		err = json.Unmarshal(reqBody, order)
 		if !common.HasError(err) {
 			if orderResponse := service.OrderRep.CreateOrder(order); orderResponse != nil {
@@ -65,7 +65,7 @@ func (service *OrderService) CreateOrder(writer http.ResponseWriter, reader *htt
 func (service *OrderService) UpdateOrder(writer http.ResponseWriter, reader *http.Request) {
 	reqBody, err := io.ReadAll(reader.Body)
 	if !common.HasError(err) {
-		var order *model.Order
+		order := model.NewOrder()
 		json.Unmarshal(reqBody, order)
 		if orderResponse := service.OrderRep.UpdateOrder(order); orderResponse != nil {
 			buildJsonResponse(writer, http.StatusCreated, orderResponse)
@@ -80,7 +80,7 @@ func (service *OrderService) UpdateOrder(writer http.ResponseWriter, reader *htt
 func (service *OrderService) DeleteOrder(writer http.ResponseWriter, reader *http.Request) {
 	reqBody, err := io.ReadAll(reader.Body)
 	if !common.HasError(err) {
-		var order *model.Order
+		order := model.NewOrder()
 		json.Unmarshal(reqBody, order)
 		if orderResponse := service.OrderRep.DeleteOrder(order); orderResponse {
 			buildJsonResponse(writer, http.StatusCreated, orderResponse)
