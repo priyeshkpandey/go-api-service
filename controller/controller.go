@@ -17,7 +17,7 @@ func getAllOrders(writer http.ResponseWriter, reader *http.Request) {
 func getOrder(writer http.ResponseWriter, reader *http.Request) {
 	service := service.NewOrderService()
 	defer service.Close()
-	service.GetOrder(writer, reader)
+	service.GetOrderById(writer, reader)
 }
 
 func createOrder(writer http.ResponseWriter, reader *http.Request) {
